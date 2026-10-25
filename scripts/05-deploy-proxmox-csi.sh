@@ -39,10 +39,11 @@ if [[ ! -f "${CSI_CONFIG_FILE}" ]]; then
     "${REPO_ROOT}/scripts/01-prep-proxmox-ceph.sh"
 fi
 
-# 1. Label nodes with topology zone & region
-echo "[*] Setting node topology labels..."
+# 1. Label nodes with topology zone & region, and annotate with Proxmox VMID
+echo "[*] Setting node topology labels and Proxmox instance-id annotation..."
 "${OC_BIN}" label nodes --all "topology.kubernetes.io/region=${CLUSTER_NAME}" --overwrite
 "${OC_BIN}" label nodes --all "topology.kubernetes.io/zone=${PVE_NODE}" --overwrite
+"${OC_BIN}" annotate nodes --all "proxmox.sinextra.dev/instance-id=${VMID}" --overwrite
 
 # 2. Create namespace csi-proxmox
 echo "[*] Creating namespace 'csi-proxmox'..."

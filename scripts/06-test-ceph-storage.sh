@@ -38,6 +38,7 @@ echo "=================================================="
 # 1. Create test namespace
 echo "[*] Creating namespace '${TEST_NS}'..."
 "${OC_BIN}" create namespace "${TEST_NS}" --dry-run=client -o yaml | "${OC_BIN}" apply -f -
+"${OC_BIN}" label ns "${TEST_NS}" pod-security.kubernetes.io/enforce=privileged --overwrite || true
 
 # 2. Deploy Test PVC and Pod
 echo "[*] Creating Test PersistentVolumeClaim on Ceph RBD..."

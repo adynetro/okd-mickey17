@@ -3,9 +3,17 @@ kind: Pod
 metadata:
   name: ceph-rbd-demo-pod
 spec:
+  securityContext:
+    runAsNonRoot: true
+    seccompProfile:
+      type: RuntimeDefault
   containers:
     - name: writer
       image: registry.access.redhat.com/ubi9/ubi-minimal:latest
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop: ["ALL"]
       command:
         - /bin/sh
         - -c
@@ -21,3 +29,4 @@ spec:
     - name: ceph-vol
       persistentVolumeClaim:
         claimName: ceph-rbd-demo-pvc
+
