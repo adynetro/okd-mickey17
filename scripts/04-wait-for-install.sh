@@ -33,6 +33,10 @@ if ! command -v "${OC_BIN}" &>/dev/null; then
     OC_BIN="${REPO_ROOT}/bin/oc"
 fi
 
+echo "[*] Ensuring VM boot order prioritizes Ceph RBD disk (scsi0)..."
+PVE_SSH="${PVE_USER}@${PVE_HOST}"
+ssh "${PVE_SSH}" "qm set ${VM_ID} --boot order=scsi0\;ide2 2>/dev/null || true"
+
 echo "[*] Waiting for Agent installer to complete installation..."
 echo "    Assets Directory: ${INSTALL_DIR}"
 echo "    Node IP:          ${VM_IP}"
