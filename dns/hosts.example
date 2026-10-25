@@ -1,0 +1,9 @@
+# /etc/hosts entries for OKD Single Node OpenShift (mickey17)
+# Append to /etc/hosts on client workstations or management containers:
+
+172.16.0.17 api.mickey17.engineering.lan
+172.16.0.17 api-int.mickey17.engineering.lan
+172.16.0.17 mickey17.engineering.lan
+172.16.0.17 console-openshift-console.apps.mickey17.engineering.lan
+172.16.0.17 oauth-openshift.apps.mickey17.engineering.lan
+172.16.0.17 canary-openshift-ingress-canary.apps.mickey17.engineering.lan

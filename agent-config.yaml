@@ -1,0 +1,35 @@
+apiVersion: v1beta1
+kind: AgentConfig
+metadata:
+  name: mickey17
+rendezvousIP: 172.16.0.17
+hosts:
+- hostname: mickey17.engineering.lan
+  role: master
+  rootDeviceHints:
+    deviceName: /dev/sda
+  interfaces:
+    - macAddress: bc:24:11:17:17:17
+      name: eth0
+  networkConfig:
+    interfaces:
+      - name: eth0
+        type: ethernet
+        state: up
+        mac-address: bc:24:11:17:17:17
+        ipv4:
+          enabled: true
+          address:
+            - ip: 172.16.0.17
+              prefix-length: 24
+          dhcp: false
+    dns-resolver:
+      config:
+        server:
+          - 172.16.0.1
+          - 10.0.0.1
+    routes:
+      config:
+        - destination: 0.0.0.0/0
+          next-hop-address: 172.16.0.1
+          next-hop-interface: eth0

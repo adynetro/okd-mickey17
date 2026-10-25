@@ -1,0 +1,35 @@
+apiVersion: v1
+baseDomain: engineering.lan
+metadata:
+  name: mickey17
+
+compute:
+- hyperthreading: Enabled
+  name: worker
+  replicas: 0
+
+controlPlane:
+  hyperthreading: Enabled
+  name: master
+  replicas: 1
+
+networking:
+  clusterNetwork:
+  - cidr: 10.128.0.0/14
+    hostPrefix: 23
+  networkType: OVNKubernetes
+  serviceNetwork:
+  - 172.30.0.0/16
+  machineNetwork:
+  - cidr: 172.16.0.0/24
+
+platform:
+  none: {}
+
+fips: false
+
+# Pull secret: community OKD supports anonymous / Quay / Red Hat registry pull secrets
+pullSecret: '{"auths":{"cloud.openshift.com":{"auth":"b3BlbnNoaWZ0LXJlbGVhc2UtZGV2K29jbV9hY2Nlc3NfNTRkNjU2MGI3ODQ4NGFlZjk3Nzk1YTQwMDE0NjNjZDc6QVJBNDc5NTJDSUQ0SVFYUFhaR1lYUUMyUlpUUkVCR0tVM0szNDVQNVI1MjhMNVdIUUtTSk9DNEtPU0JRNjc1VQ==","email":"adynetro@yahoo.com"},"quay.io":{"auth":"b3BlbnNoaWZ0LXJlbGVhc2UtZGV2K29jbV9hY2Nlc3NfNTRkNjU2MGI3ODQ4NGFlZjk3Nzk1YTQwMDE0NjNjZDc6QVJBNDc5NTJDSUQ0SVFYUFhaR1lYUUMyUlpUUkVCR0tVM0szNDVQNVI1MjhMNVdIUUtTSk9DNEtPU0JRNjc1VQ==","email":"adynetro@yahoo.com"}}}'
+
+# SSH public key for cluster node access
+sshKey: 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOJ8rTERMsjAOFgzo4xstCvs5irBayl409XboQNhXcDs root@agy'

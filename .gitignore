@@ -1,0 +1,23 @@
+# Installation runtime directories & secrets
+install-dir/
+auth/
+*.ign
+*.iso
+*.qcow2
+*.qcow2.gz
+kubeconfig
+tls/
+
+# PVE CSI generated credentials
+pve-csi/config.yaml
+
+# Local environment overrides
+env.sh
+.env
+
+# OS & Editor files
+.DS_Store
+*.swp
+*~
+.idea/
+.vscode/

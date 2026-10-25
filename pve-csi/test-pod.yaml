@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ceph-rbd-demo-pod
+spec:
+  containers:
+    - name: writer
+      image: registry.access.redhat.com/ubi9/ubi-minimal:latest
+      command:
+        - /bin/sh
+        - -c
+        - |
+          echo "Ceph RBD Persistent Volume test written at $(date)" > /mnt/ceph-data/success.txt
+          echo "Cluster: mickey17 (Single Node OpenShift PoC on Ceph)" >> /mnt/ceph-data/success.txt
+          echo "Node: $(hostname)" >> /mnt/ceph-data/success.txt
+          tail -f /dev/null
+      volumeMounts:
+        - name: ceph-vol
+          mountPath: /mnt/ceph-data
+  volumes:
+    - name: ceph-vol
+      persistentVolumeClaim:
+        claimName: ceph-rbd-demo-pvc
